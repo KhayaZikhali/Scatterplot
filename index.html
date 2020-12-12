@@ -9,48 +9,71 @@
      <p style="background-color: aqua;"> Scatterplot Graph </p>
    </nav>
 <script>
-
-const h = 600;
-const dataset = [
-                  [ 34,    78 ],
+    const dataset = [
+                  [ 34,     78 ],
                   [ 109,   280 ],
                   [ 310,   120 ],
-                  [ 79,    411 ],
+                  [ 79,   411 ],
                   [ 420,   220 ],
                   [ 233,   145 ],
                   [ 333,   96 ],
-                  [ 222,   333 ],
+                  [ 222,    333 ],
                   [ 78,    320 ],
-                  [ 21,    123 ]
+                  [ 21,   123 ]
                 ];
 
-     {/*
-      create the div in which the graph is located
-      create the axes with divisions ranging from 0 - 1000 with 20 marking
-      create thr circle elememnts and place them using simulated data in the graph
-    */}
-    
-  // adjust properties of the body
-const svg = d3.select("body")
-          .append("svg")
+    const w = 600;
+    const h = 550;
+    const padding = 50;
 
-// creating the circle elements
-        svg.selectAll("circle")  
-          .data(dataset)
-          .enter()
-          .append("circle")
-          .attr("cx", (d, i)=> d[0])
-          .attr("cy", (d, i)=>h -  d[1])
-          .attr("r", 5)
+    const xScale = d3.scaleLinear()
+                     .domain([0, d3.max(dataset, (d) => d[0])])
+                     .range([padding, h*2]);
 
-// text describtion of the elements
-svg.selectAll("text")
+    const yScale = d3.scaleLinear()
+                     .domain([0, d3.max(dataset, (d) => d[1])])
+                     .range([h,padding]);
+
+    const svg = d3.select("body")
+                  .append("svg")
+
+    svg.selectAll("circle")
+       .data(dataset)
+       .enter()
+       .append("circle")
+       .attr("cx", (d) => xScale(d[0]))
+       .attr("cy",(d) => yScale(d[1]))
+       .attr("r", (d) => 5);
+
+    svg.selectAll("text")
        .data(dataset)
        .enter()
        .append("text")
-       .attr("x", (d, i) =>5+d[0])
-      .attr("y", (d, i) =>h-d[1])
-      .text((d, i) => d)
+       .text((d) =>  (d[0] + "," + d[1]))
+       .attr("x", (d) => xScale(d[0] + 10))
+       .attr("y", (d) => yScale(d[1]))
 
+    const xAxis = d3.axisBottom(xScale);
+    // Add your code below this line
+    const yAxis = d3.axisLeft(yScale);
+    // Add your code above this line
+
+    svg.append("g")
+       .attr("transform", "translate(0," + (h) + ")")
+       .call(xAxis);
+
+    // Add your code below this line
+ svg.append("g")
+   .attr("transform", "translate( " + (padding) + ",0)")
+   .call(yAxis);
+
+<<<<<<< Updated upstream
+=======
+    // Add your code above this line
+    </script>
+</body>
+
+
+>>>>>>> Stashed changes
 </script>
 </body>

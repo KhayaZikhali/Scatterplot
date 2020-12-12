@@ -1,5 +1,5 @@
 body {
-    background-color:black;
+    background-color:green;
     width:100vw;
     height:100vh;
 }
@@ -13,7 +13,6 @@ svg {
     margin-top:8vh ;
 }
 
-
 nav {
     background-color:aqua;
     width: 100vw;
@@ -26,6 +25,5 @@ nav {
 } 
 
 .this {
-    background-color: darkblue
-    
+    background-color: darkblue   
 }
