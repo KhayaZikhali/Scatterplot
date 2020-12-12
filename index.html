@@ -1,0 +1,58 @@
+<head>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://d3js.org/d3.v4.min.js"></script> 
+    <title>Scatterplot Graph</title>
+</head>
+
+<body>
+    <nav> 
+     <p style="background-color: aqua;"> Scatterplot Graph </p>
+   </nav>
+<script>
+
+const h = 600;
+const dataset = [
+                  [ 34,    78 ],
+                  [ 109,   280 ],
+                  [ 310,   120 ],
+                  [ 79,    411 ],
+                  [ 420,   220 ],
+                  [ 233,   145 ],
+                  [ 333,   96 ],
+                  [ 222,   333 ],
+                  [ 78,    320 ],
+                  [ 21,    123 ]
+                ];
+
+     {/*
+      create the div in which the graph is located
+      create the axes with divisions ranging from 0 - 1000 with 20 marking
+      create thr circle elememnts and place them using simulated data in the graph
+    */}
+    
+  // adjust properties of the body
+const svg = d3.select("body")
+          .append("svg")
+
+// creating the circle elements
+        svg.selectAll("circle")  
+          .data(dataset)
+          .enter()
+          .append("circle")
+          .attr("cx", (d, i)=> d[0])
+          .attr("cy", (d, i)=>h -  d[1])
+          .attr("r", 5)
+
+// text describtion of the elements
+svg.selectAll("text")
+       .data(dataset)
+       .enter()
+       .append("text")
+       .attr("x", (d, i) =>5+d[0])
+      .attr("y", (d, i) =>h-d[1])
+      .text((d, i) => d)
+
+
+
+</script>
+</body>
