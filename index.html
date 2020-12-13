@@ -9,30 +9,38 @@
      <p style="background-color: aqua;"> Scatterplot Graph </p>
    </nav>
 <script>
-    const dataset = [
-                  [ 34,     78 ],
-                  [ 109,   280 ],
-                  [ 310,   120 ],
-                  [ 79,   411 ],
-                  [ 420,   220 ],
-                  [ 233,   145 ],
-                  [ 333,   96 ],
-                  [ 222,    333 ],
-                  [ 78,    320 ],
-                  [ 21,   123 ]
-                ];
+    const dataset = [{
+    "Time": "36:50",
+    "Place": 1,
+    "Seconds": 2210,
+    "Name": "Marco Pantani",
+    "Year": 1995,
+    "Nationality": "ITA",
+    "Doping": "Alleged drug use during 1995 due to high hematocrit levels",
+    "URL": "https://en.wikipedia.org/wiki/Marco_Pantani#Alleged_drug_use"
+  },
+  {
+    "Time": "36:55",
+    "Place": 2,
+    "Seconds": 2215,
+    "Name": "Marco Pantani",
+    "Year": 1997,
+    "Nationality": "ITA",
+    "Doping": "Alleged drug use during 1997 due to high hermatocrit levels",
+    "URL": "https://en.wikipedia.org/wiki/Marco_Pantani#Alleged_drug_use"
+  },]
 
     const w = 600;
     const h = 550;
     const padding = 50;
 
     const xScale = d3.scaleLinear()
-                     .domain([0, d3.max(dataset, (d) => d[0])])
-                     .range([padding, h*2]);
+                     .domain([0, 2000])
+                     .range([padding, h*2])
 
     const yScale = d3.scaleLinear()
-                     .domain([0, d3.max(dataset, (d) => d[1])])
-                     .range([h,padding]);
+                     .domain([0, 3000] )
+                     .range([h,padding])
 
     const svg = d3.select("body")
                   .append("svg")
@@ -50,8 +58,8 @@
        .enter()
        .append("text")
        .text((d) =>  (d[0] + "," + d[1]))
-       .attr("x", (d) => xScale(d[0] + 10))
-       .attr("y", (d) => yScale(d[1]))
+       .attr("x", (d) => xScale(d[2] + 10))
+       .attr("y", (d) => yScale(d[4]))
 
     const xAxis = d3.axisBottom(xScale);
     // Add your code below this line
@@ -66,14 +74,9 @@
  svg.append("g")
    .attr("transform", "translate( " + (padding) + ",0)")
    .call(yAxis);
-
-<<<<<<< Updated upstream
-=======
-    // Add your code above this line
+    //Add your code above this line
     </script>
 </body>
 
-
->>>>>>> Stashed changes
 </script>
 </body>
