@@ -6,12 +6,18 @@
 
 <body>
     <nav> 
-     <p style="background-color: aqua;">Scatterplot Graph</p>
+     <p style="background-color: aqua;">DOPING STATISTICS</p>
    </nav>
 <script>
 
   //color function
+  const doIt = document.getElementsByName("circle");
 
+  function addClass(){
+    doIt.addEventListener("mouseeenter", () => {
+        classList.addClass("bubble")
+    } ) 
+  }
 
    // dataset to be plotted 
    
@@ -368,20 +374,28 @@
   }
 ];
 
-
     const w = 1200;
     const h = 600;
-    const padding = 50;
+    const padding = 80;
     
+    var parseTime = d3.timeParse("%Y");
+
+var dates = [];
+for (let obj of dataset) {
+  dates.push(parseTime(obj["Year"]));
+}
+
+var domain = d3.extent(dates)
+
     // scale for the xAxis
     const xScale = d3.scaleLinear()
-                     .domain([d3.min(dataset, (d) => d["Seconds"]), d3.max(dataset, (d)=> d["Seconds"])])
+                     .domain([d3.min(dataset, (d) => d["Seconds"]/60), d3.max(dataset, (d)=> d["Seconds"] /60)])
                      .range([padding,w])
-    const xAxis = d3.axisBottom(xScale);
+    const xAxis = d3.axisBottom(xScale)
                     
    // scale for the yAxis
-    const yScale = d3.scaleLinear()
-                     .domain([d3.min(dataset, (d)=> d["Year"]) ,d3.max(dataset, (d) => (d["Year"]))])
+    const yScale = d3.scaleTime()
+                     .domain(domain)
                      .range([h,padding])
     const yAxis = d3.axisLeft(yScale);  
 
@@ -394,16 +408,16 @@
        .data(dataset)
        .enter()
        .append("circle")
-       .attr("cx", (d) => xScale(d["Seconds"]))
-       .attr("cy", (d) => yScale(d["Year"])  )
+       .attr("cx", (d) => xScale(d["Seconds"]/60))
+       .attr("cy", (d) => yScale(parseTime(d["Year"])))
        .attr("r", (d) => 5)
+       .attr("name", "circle")
+       .attr("class", "tooltip")
        .style("fill", (d) => {
                       if (d["Doping"] !== ""){
                        return "red"
                       } else {
-                       return "blue"
-                  }
-                })
+                       return "blue" } });
 
    // xAxis
    svg.append("g")
@@ -415,7 +429,37 @@
        .attr("transform", "translate( " + (padding) + ",0)")
        .call(yAxis);
 
+  //yAxis label
+    svg.append("text")
+       .attr("class", "ylabel")
+       .attr("text-anchor", "end")
+       .attr("y", 20)
+       .attr("dy", ".75em")
+       .attr("transform", "rotate(-90)")
+       .attr("x", -300)
+       .attr("dx", ".75em")
+       .attr("transform", "rotate(-90)")
+       .text("Years("+ d3.min(dataset, (d) => d["Year"] + " - " + d3.max(dataset, (d) => d["Year"] ) + ")"))
+       
+  // xAxis Label
+    svg.append("text")
+       .attr("class", "xlabel")
+       .attr("text-anchor", "end")
+       .attr("y", h+ 50)
+       .attr("dy", "0em")
+       .attr("transform", "rotate(-180)")
+       .attr("x", 700)
+       .attr("dx", "0em")
+       .attr("transform", "rotate(0)")
+       .text("Times (Secs)("+ d3.min(dataset, (d) => d["Seconds"] + " - " + d3.max(dataset, (d) => d["Seconds"] ) + ")"))
 
-   // add    
+
+    d3.select("circle")
+  .on("mouseover", function(){return tooltip.style("visibility", "visible").classList.addClass("tooltiptext");})
+  .on("mouseout", function(){return tooltip.style("visibility", "hidden");});
+
+
+   // add tooltip to the circles
+   //label the axis    
     </script>
 </body>

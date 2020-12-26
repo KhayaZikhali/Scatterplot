@@ -3,7 +3,6 @@ body {
     width:100vw;
     height:100vh;
 }
-/*  change the colors */
 
 svg {
     display:block;
@@ -11,7 +10,7 @@ svg {
     width:100vw;
     height:800;
     margin:auto;
-    margin-top:8vh ;
+    margin-top:2vh ;
 }
 
 nav {
@@ -27,4 +26,29 @@ nav {
 
 .this {
     background-color: darkblue   
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+    content: 'That my shit ';
+}
+
+.tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px; 
+    position: absolute;
+    z-index: 1;
+    content: 'ODnt be scared';
+}
+  
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    cursor: pointer
 }
