@@ -1,8 +1,7 @@
 body {
     background-color:lightblue;
     width:100vw;
-    height:800;
-    overflow: hidden;
+    height:800
 }
 
 p{
@@ -32,5 +31,9 @@ nav {
 } 
 
 
+circle.title {
+    background-color:yellow;
+    font-size: 30px;
+}
 
 

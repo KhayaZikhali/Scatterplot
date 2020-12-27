@@ -8,7 +8,7 @@
     <nav> 
      <p>Cycling Data</p>
    </nav>
-<script>
+    <script>
    // dataset to be plotted 
     const dataset = [
   {
@@ -362,31 +362,28 @@
     "URL": ""
   }
 ];
-
+    
     const w = 1200;
     const h = 600;
     const padding = 80;
-
-    // parse the date ticks
     var parseTime = d3.timeParse("%Y");
-
-var dates = [];
-for (let obj of dataset) {
-  dates.push(parseTime(obj["Year"]));
-};
+    var dates = [];
+    for (let obj of dataset) {
+     dates.push(parseTime(obj["Year"]));
+    }
 
 var domain = d3.extent(dates)
 
     // scale for the xAxis
     const yScale = d3.scaleLinear()
-                     .domain([d3.min(dataset, (d) => d["Seconds"]/60), d3.max(dataset, (d)=> d["Seconds"]/60)])
-                     .range([h, padding])
+                     .domain([d3.min(dataset, (d) => d["Seconds"] /60), d3.max(dataset, (d)=> d["Seconds"] /60)])
+                     .range([h ,padding])
     const yAxis = d3.axisLeft(yScale)
                     
    // scale for the yAxis
     const xScale = d3.scaleTime()
                      .domain(domain)
-                     .range([padding , w])
+                     .range([padding, w])
     const xAxis = d3.axisBottom(xScale);  
 
    // select the body                  
@@ -398,24 +395,26 @@ var domain = d3.extent(dates)
        .data(dataset)
        .enter()
        .append("circle")
-       .attr("cy", (d) => yScale(d["Seconds"]))
-       .attr("cx", (d) => xScale(parseTime(d["Year"])))
-       .attr("r", (d) => 4)
+       .attr("cx", (d) => xScale(d["Seconds"]/60))
+       .attr("cy", (d) => yScale(parseTime(d["Year"])))
+       .attr("r", (d) => 5)
        .attr("class", "dot")
        .style("fill", (d) => {
                       if (d["Doping"] !== ""){
                        return "red"
                       } else {
                        return "blue" }})
-        .append("title")
-        .attr("class", " tipsy")
-        .html(((d, i ) => "Name : " + d["Name"]   + "  ,  " 
+       .append("title")
+       .attr("class", " tootltip ")
+       .style("fill", "blue")
+       .style("fill", "cyan")
+       .html(((d, i ) => "Name : " + d["Name"]   + "  ,  " 
         + "Nationality : " + d["Nationality"] + "  ,  " 
         + "Year : " +   d["Year"] + "  ,  " 
         + "Position : " +  d["Place"] +   "   ,  "
-        + "Doping : " + d["Doping"] ))
-              
-    // xAxis
+        + "Doping : " + d["Doping"] ))             
+      
+        // xAxis
    svg.append("g")
        .attr("class", "xAxis")
        .attr("transform", "translate(0," + (h) + ")")
@@ -423,10 +422,9 @@ var domain = d3.extent(dates)
    
    // yAxis 
     svg.append("g")
-       .attr("class", "yAxis")
+       .attr("class"  , "yAxis")
        .attr("transform", "translate( " + (padding) + ",0)")
        .call(yAxis);
-
 
   //yAxis label
     svg.append("text")
@@ -438,7 +436,8 @@ var domain = d3.extent(dates)
        .attr("x", -300)
        .attr("dx", ".75em")
        .attr("transform", "rotate(-90)")
-       .text("Times (Mins)")
+       .text("Time (Mins)") 
+       
        
   // xAxis Label
     svg.append("text")
@@ -451,10 +450,5 @@ var domain = d3.extent(dates)
        .attr("dx", "0em")
        .attr("transform", "rotate(0)")
        .text("Years("+ d3.min(dataset, (d) => d["Year"] + " - " + d3.max(dataset, (d) => d["Year"] ) + ")"))
-    // chart guide
-  
-
-   // add tooltip to the circles
-   //label the axis    
     </script>
 </body>
