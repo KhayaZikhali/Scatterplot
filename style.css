@@ -1,12 +1,12 @@
 body {
-    background-color:lightblue;
+    background-color:transparent;
     width:100vw;
-    height:800
+    height:100vh;
 }
 
 p{
     font-weight: bold;
-    font-size:40px;
+    font-size:20px;
     margin: auto;
 }
 
@@ -14,26 +14,81 @@ svg {
     display:block;
     background-color:oldlace;
     width:100vw;
-    height:100vh;
-    margin:0;
+    height:800;
+    margin:auto;
     margin-top:2vh ;
 }
 
 nav {
     background-color:aqua;
     width: 100vw;
-    height: fit-content;
+    height: 5vh;
     top:0;
     left:0;
     position: absolute;
     text-align:center;
-    padding:1vh;
+    padding:10px;
 } 
 
 
-circle.title {
+.title {
     background-color:yellow;
     font-size: 30px;
 }
+.this {
+    background-color: darkblue   
+}
 
+.tooltip {
+    position: relative;
+    background-color:yellow;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
 
+.tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: yellow;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px; 
+    position: absolute;
+    z-index: 1;
+    font-size:50px;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: yellow;
+    color: green;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 3;
+    font-size:50px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  }
+
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+    width:120px;
+    cursor: pointer;
+    font-size:50px;
+    background:yellow;
+  }
+  
+  .tooltip-inner {
+    white-space: pre-wrap;
+}
+
+.guide {
+    visibility: visible;
+    width: 1vw;
+    height: 1vw;
+
+}
