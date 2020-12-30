@@ -10,14 +10,6 @@
    </nav>
                                         
     <script>
-        const doIt = document.getElementsByName("circle");
-
-function addClass(){
-  doIt.addEventListener("mouseeenter", () => {
-      classList.addClass("bubble")
-  } ) 
-};
-
  // dataset to be plotted 
   const dataset = [
 {
@@ -371,7 +363,6 @@ function addClass(){
   "URL": ""
 }
 ];
-
   const w = 1200;
   const h = 600;
   const padding = 80;
@@ -381,11 +372,11 @@ function addClass(){
 var dates = [];
 for (let obj of dataset) {
 dates.push(parseTime(obj["Year"]));
-}
+};
 var domain = d3.extent(dates)
+console.log(domain)
 
-
-  // scale for the xAxis
+ // scale for the xAxis
   const yScale = d3.scaleLinear()
                    .domain([d3.min(dataset, (d) => d["Seconds"]/60), d3.max(dataset, (d)=> d["Seconds"] /60)])
                    .range([h, padding])
@@ -394,7 +385,7 @@ var domain = d3.extent(dates)
  // scale for the yAxis
   const xScale = d3.scaleTime()
                    .domain(domain)
-                   .range([padding, w ])
+                   .range([padding, w])
 
 
 
@@ -433,8 +424,7 @@ var domain = d3.extent(dates)
       .style("font-size", 50)
       .style("color", "red")                
     
-    
-      // xAxis
+ // xAxis
  svg.append("g")
      .attr("class", "xAxis")
      .attr("transform", "translate(0," + (h) + ")")
@@ -445,7 +435,7 @@ var domain = d3.extent(dates)
      .attr("transform", "translate( " + (padding) + ",0)")
      .call(yAxis);
 
-//yAxis label
+ //yAxis label
   svg.append("text")
      .attr("class", "ylabel")
      .attr("text-anchor", "end")
@@ -457,7 +447,7 @@ var domain = d3.extent(dates)
      .attr("transform", "rotate(-90)")
      .text("Time (Mins) " );      
      
-// xAxis Label
+ // xAxis Label
   svg.append("text")
      .attr("class", "xlabel")
      .attr("text-anchor", "end")
@@ -469,7 +459,7 @@ var domain = d3.extent(dates)
      .attr("transform", "rotate(0)")
      .text("Years("+ d3.min(dataset, (d) => d["Year"] + " - " + d3.max(dataset, (d) => d["Year"] ) + ")"))
 
-  // chart guide
+ // chart guide
    
     </script>
 </body>
